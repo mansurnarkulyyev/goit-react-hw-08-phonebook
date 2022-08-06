@@ -1,0 +1,18 @@
+.list{
+    list-style: none;
+    padding:0;
+}
+.link {
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(1, 156, 1);
+    padding: 10px 15px;
+    border: 1px solid rgb(1, 156, 1);
+}
+
+.isActive {
+    composes: link;
+    color: #fff;
+    background-color: rgb(1, 156, 1);
+}
+
