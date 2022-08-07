@@ -2,7 +2,7 @@ export const items = [
     {
         id: 1,
         name: 'Contacts',
-        link: '/contacts',
+        to: '/contacts',
         private: true,
     },
 ]

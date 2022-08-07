@@ -16,14 +16,24 @@ export const fetchContacts = createAsyncThunk(
   }
 );
 
+export const removeContact = createAsyncThunk(
+  "contacts/remove",
+  async (data, { rejectWithValue }) => {
+    try {
+      return await removeContacts(data);
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const addContact = createAsyncThunk(
   "contacts/add",
   async (data, { rejectWithValue }) => {
     try {
       return addContacts(data);
     } catch (error) {
-      const { data, status } = error.response;
-      return rejectWithValue({data, status});
+     return rejectWithValue(error);
     }
   },
   {
@@ -40,13 +50,4 @@ export const addContact = createAsyncThunk(
   }
 );
 
-export const removeContact = createAsyncThunk(
-  "contacts/remove",
-  async (data, { rejectWithValue }) => {
-    try {
-      return await removeContacts(data);
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
+

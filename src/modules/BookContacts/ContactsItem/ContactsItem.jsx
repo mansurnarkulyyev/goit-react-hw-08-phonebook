@@ -1,14 +1,18 @@
 import PropTypes from 'prop-types';
 import { memo } from 'react';
+import Button from 'shared/components/Button';
 
-const ContactsItem = ({ id, name, phone, onClick }) => {
+const ContactsItem = ({ id, name, number, onClick }) => {
   // console.log(phone);
   return (
     <li>
-      {name}: {phone}
-      <button onClick={() => onClick(id)} type="button">
-        Delete
-      </button>
+      {name}: {number}
+      <Button
+        text="Delete"
+        type="button"
+        onClick={(e) => {
+          onClick(id);
+        }} />
     </li>
   );
 };

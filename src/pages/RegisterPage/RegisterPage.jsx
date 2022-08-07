@@ -1,16 +1,23 @@
 import RegisterForm from 'modules/RegisterForm';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { signup } from '../../redux/auth/auth-operation.js';
+import { Navigate } from 'react-router-dom';
+import useIsLogin from 'shared/hooks/useLogin.js';
+import { signupRequest } from '../../redux/auth/auth-operation.js';
 
 
 function RegisterPage() {
+
+    const isLogin = useIsLogin()
     const dispatch = useDispatch();
-    // console.log(signup);
     const onSignup = (data) => {
-        // console.log(data);
-        dispatch(signup(data));
+        dispatch(signupRequest(data));
     }
+
+    if (isLogin) {
+        <Navigate to={"/contacts"} />
+    }
+
 
     return (
         <main>

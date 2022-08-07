@@ -4,13 +4,13 @@ import { memo } from 'react';
 
 const ContactsList = ({ items, onClick }) => {
   const elements = items.map((el) => {
-    const { phone, name, id } = el;
+    const { number, name, id } = el;
     return (
       <ContactsItem
         key={id}
         id={id}
         onClick={onClick}
-        phone={phone}
+        number={number}
         name={name}
       />
     );
@@ -25,7 +25,7 @@ ContactsList.propTypes = {
   onClick: PropTypes.func.isRequired,
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      phone: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
     })

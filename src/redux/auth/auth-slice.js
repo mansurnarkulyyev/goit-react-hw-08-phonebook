@@ -1,8 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-import { signup, login } from "./auth-operation";
+import { signupRequest, loginRequest,getCurrent,logoutRequest } from "./auth-operation";
 
-import * as utils from '../../shared/services/utils.js';
+// import * as utils from '../../shared/services/utils.js';
 
 const initialState = {
     user: {},//информация о полбзователья 
@@ -12,27 +12,52 @@ const initialState = {
     error: null,
 };
 
+const pending = (store) => ({ ...store, loading: true, error: null });
+const rejected = (store, { payload }) => ({ ...store, loading: false, error: payload.message });
+
+const fulfilled = (store, { payload }) => ({
+      ...store,
+      loading: false,
+      token: payload.token,
+      isLogin: true,
+      user: payload.user,
+    });
+
+
 const authSlice = createSlice({
-    name: "auth",
+    name: "contacts",
     initialState,
     extraReducers: {
-        [signup.pending]: utils.pending,
-        [signup.fulfilled]: (store, {payload}) => {//пайлоад это ответ сервера запишется то есть юзер объект с данными и токен
-            store.loading = false;
-            store.user = payload.user;
-            store.token = payload.token;
-            store.isLogin = true;
-        },
-        [signup.rejected]: utils.rejected  ,
-        [login.pending]: (store) => ({...store, loading: true, error: null}),
-        [login.fulfilled]: (store, {payload}) => {
-            store.loading = false;
-            store.user = payload.user;
-            store.token = payload.token;
-            store.isLogin = true;
-        },
-        [login.rejected]: (store, {payload}) => ({...store, loading: false, error: payload}),
-    }
-});
+        [signupRequest.pending]: pending,
+        [signupRequest.fulfilled]: fulfilled,
+        [signupRequest.rejected]: rejected ,
+        [loginRequest.pending]: pending,
+        [loginRequest.fulfilled]: fulfilled,
+        [loginRequest.rejected]:rejected,
+  },
+    [logoutRequest.pending]: pending,
+    [logoutRequest.rejected]: rejected,
+    [logoutRequest.fulfilled]: () => ({...initialState}),
+
+    [getCurrent.pending]: pending,
+    [getCurrent.rejected]: () => ({...initialState}),
+    [getCurrent.fulfilled]: (store, { payload }) => {
+      if (payload.token) {
+        return {
+          ...store,
+          loading: false,
+          isLogin: true,
+          user: payload.user,
+          token: payload.token
+        };
+      }
+      return {
+        ...store,
+        loading: false,
+        isLogin: true,
+        user: payload,
+      };
+    },
+  });
 
 export default authSlice.reducer;

@@ -9,9 +9,9 @@ import {
 import { getContacts } from "../../redux/contacts/contacts-selector";
 import { useDispatch } from "react-redux";
 
-import ContactsList from "../../modules/ContactsList/ContactsList";
-import FormNewContact from "../../modules/FormNewContact/FormNewContact";
-import SearchContact from "../../modules/SearchContact/SearchContact";
+import ContactsList from "../../modules/BookContacts/ContactsList/ContactsList";
+import FormNewContact from "../../modules/BookContacts/FormNewContact/FormNewContact";
+import SearchContact from "../../modules/BookContacts/SearchContact/SearchContact";
 
 // import "./index.css";
 

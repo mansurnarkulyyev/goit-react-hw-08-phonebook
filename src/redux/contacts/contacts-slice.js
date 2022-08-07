@@ -8,34 +8,31 @@ const initialState = {
     error: null
 };
 
+const pending = (store) => ({ ...store, loading: true, error: null });
+const rejected = (store, { payload }) => ({ ...store, loading: false, error: payload });
+
 const contactsSlice = createSlice({
     name: "contacts",
     initialState,
     extraReducers: {
-        [fetchContacts.pending]: (store) => ({...store, loading: true, error: null}),
+        [fetchContacts.pending]: pending,
         [fetchContacts.fulfilled]: (store, {payload}) => {
             store.items = payload;
             store.loading = false;
         },
-        [fetchContacts.rejected]: (store, {payload}) => ({...store, loading: false, error: payload}),
-        [addContact.pending]: (store) => ({...store, loading: true, error: null}),
+        [fetchContacts.rejected]: rejected,
+        [addContact.pending]: pending,
         [addContact.fulfilled]: (store, {payload}) => {
             store.items.push(payload);
             store.loading = false;
         },
-        [addContact.rejected]: (store, {payload}) => ({...store, loading: false, error: payload}),
-        [removeContact.pending]: (store) => {
-            store.loading = true;
-            store.error = null;
-        },
+        [addContact.rejected]: rejected,
+        [removeContact.pending]: pending,
         [removeContact.fulfilled]: (store, {payload}) => {
             store.items = store.items.filter(item => item.id !== payload.id);
             store.loading = false;
         },
-        [removeContact.rejected]: (store, {payload}) => {
-            store.loading = false;
-            store.error = payload;
-        }
+        [removeContact.rejected]: rejected,
     }
 });
 

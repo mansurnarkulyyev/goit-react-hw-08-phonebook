@@ -9,12 +9,13 @@ function getClassName({ isActive }) {
 }
 
 
-function HeaderMenu() {
-
-    const elements = items.map(item => <li key={item.id} className={st.item}>
-        <NavLink className={getClassName} to={item.link}>
-            {item.name}
-        </NavLink></li>)
+function HeaderMenu({ isLogin }) {
+    const selectItems = isLogin ? items : items.filter(item => !item.private)
+    const elements = selectItems.map(({ id, to, name }) =>
+        <li key={id} className={st.item}>
+            <NavLink className={getClassName} to={to}>
+                {name}
+            </NavLink></li>)
 
     return (
         <nav className={st.wrapper}>

@@ -1,12 +1,22 @@
 import React from 'react';
 import Button from 'shared/components/Button';
+import { useSelector, useDispatch } from "react-redux";
 
+import { getUser } from "../../redux/auth/auth-selector";
+
+import { logoutRequest } from "../../redux/auth/auth-operation.js";
+import st from "./userMenu.module.css";
 function UserMenu() {
-    function onClick() { }
+    const { name } = useSelector(getUser);
+    const dispatch = useDispatch();
+
+    const onLogout = () => {
+        dispatch(logoutRequest());
+    }
     return (
-        <div>
-            <p>email</p>
-            <Button text='Logout' type='button' onClick={onClick} />
+        <div className={st.user}>
+            <p>{name}</p> |
+            <Button text='Logout' type='button' onClick={onLogout} />
         </div>
     )
 }
