@@ -1,10 +1,10 @@
 import { memo } from 'react';
 import PropTypes from "prop-types";
-import Button from 'shared/components/Button';
 import TextField from 'shared/components/TextField';
 import useForm from 'shared/hooks/useForm';
 import { fields } from './fields';
 import { initialState } from "./initialState";
+import SmallButton from 'shared/components/SmallButton';
 
 
 const FormNewContact = ({ onSubmit }) => {
@@ -18,7 +18,7 @@ const FormNewContact = ({ onSubmit }) => {
     <form onSubmit={handleSubmit} >
       <TextField value={name} onChange={handleChange} {...fields.name} />
       <TextField value={number} onChange={handleChange} {...fields.number} />
-      <Button text="Add contact" />
+      <SmallButton type="submit" text="Add contact" />
     </form>
   );
 };

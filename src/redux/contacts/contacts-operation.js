@@ -4,6 +4,8 @@ import {
   removeContacts,
   addContacts,
 } from "../../shared/services/API/api.js";
+// import * as api from "../../shared/services/API/api.js";
+
 
 export const fetchContacts = createAsyncThunk(
   "contacts/fetch",
@@ -20,7 +22,8 @@ export const removeContact = createAsyncThunk(
   "contacts/remove",
   async (data, { rejectWithValue }) => {
     try {
-      return await removeContacts(data);
+      const result = await removeContacts(data);
+            return result;
     } catch (error) {
       return rejectWithValue(error);
     }

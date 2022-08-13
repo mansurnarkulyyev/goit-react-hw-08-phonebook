@@ -36,11 +36,12 @@ const ContactsPage = () => {
         dispatch(fetchContacts());
     }, [dispatch]);
 
-    const onAddPhone = useCallback(
+    const onAddContact = useCallback(
         (obj) => dispatch(addContact(obj)),
         [dispatch]
     );
-    const onRemovePhone = useCallback(
+
+    const onRemoveContact = useCallback(
         (id) => {
             dispatch(removeContact(id));
         },
@@ -55,14 +56,14 @@ const ContactsPage = () => {
     return (
         <div className="container">
             <h1 className="title">Phonebook</h1>
-            <FormNewContact onSubmit={onAddPhone} />
+            <FormNewContact onSubmit={onAddContact} />
 
             <h2 className="title">Contacts</h2>
             <SearchContact onChange={changeFilterState} />
             {loading && <p>Loading...</p>}
             {error && <p>{`Error: ${error}`}</p>}
             {items.length > 0 && !error && !loading && (
-                <ContactsList items={filteredItems()} onClick={onRemovePhone} />
+                <ContactsList items={filteredItems()} onClick={onRemoveContact} />
             )}
         </div>
     );

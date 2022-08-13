@@ -1,0 +1,7 @@
+.SmallButton{
+        background-color: rgb(1, 156, 1);
+        border: none;
+        color: white;
+        border-radius: 3px;
+        padding: 7px 14px;
+}

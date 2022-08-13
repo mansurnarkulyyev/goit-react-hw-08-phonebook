@@ -5,7 +5,7 @@ import TextField from "../../shared/components/TextField";
 
 import { initialState } from "./initialState";
 import { fields } from "./fields";
-import Button from "shared/components/Button";
+import SmallButton from "shared/components/SmallButton";
 
 const LoginForm = ({ onSubmit }) => {
     const { state, handleChange, handleSubmit } = useForm({ onSubmit, initialState });
@@ -16,7 +16,7 @@ const LoginForm = ({ onSubmit }) => {
         <form onSubmit={handleSubmit}>
             <TextField value={email} onChange={handleChange} {...fields.email} />
             <TextField value={password} onChange={handleChange} {...fields.password} />
-            <Button text="Login" type="submit">Login</Button>
+            <SmallButton text="Login" type="submit">Login</SmallButton>
         </form>
     )
 }

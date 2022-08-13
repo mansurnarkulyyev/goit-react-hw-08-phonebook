@@ -5,10 +5,11 @@ const instance = axios.create({
 });
 
 const setToken = (token = "") => {
+    // debugger
+
     if (token) {
         return instance.defaults.headers.authorization = `Bearer ${token}`;
     }
-    // debugger
     instance.defaults.headers.authorization = "";
 }
 
