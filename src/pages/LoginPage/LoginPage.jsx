@@ -6,15 +6,11 @@ import { loginRequest } from '../../redux/auth/auth-operation.js';
 import LoginForm from "../../modules/LoginForm/LoginForm";
 import useIsLogin from "shared/hooks/useLogin.js";
 import { Navigate } from "react-router-dom";
-// import { isLogin } from "redux/auth/auth-selector.js";
 
 const LoginPage = () => {
     const isLogin = useIsLogin()
-
     const dispatch = useDispatch();
-
     const onLogin = (data) => {
-        // console.log(data);
         dispatch(loginRequest(data));
     }
 
