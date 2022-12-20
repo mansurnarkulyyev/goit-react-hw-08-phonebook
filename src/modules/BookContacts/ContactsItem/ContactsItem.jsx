@@ -3,7 +3,6 @@ import { memo } from 'react';
 import SmallButton from 'shared/components/SmallButton';
 
 const ContactsItem = ({ id, name, number, onClick }) => {
-  // console.log(phone);
   return (
     <li>
       {name}: {number}
